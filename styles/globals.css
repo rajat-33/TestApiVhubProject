@@ -15,6 +15,43 @@ a {
   box-sizing: border-box;
 }
 
+.main-container{
+  width:100vw;
+  height: 100vh;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.filter-container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 40vh;
+  width:30vw;
+}
+
+.select-category-container, .select-country-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.apply-btn{
+  padding: 0.5rem 1.7rem;
+  width: auto;
+  border: 1px solid #eaecf0;
+  border-radius: 50px;
+  margin: 10px;
+  transition: all 0.3s ease-in-out, color 0s;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #ffffff;
+  background: linear-gradient(90deg, #0052ff 0%, #09c5f9 100%);
+  cursor: pointer;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
