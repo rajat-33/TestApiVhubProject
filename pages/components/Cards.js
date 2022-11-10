@@ -18,15 +18,19 @@ const Cards=(props)=>
 {
   return(
     <>
-    <div>
-    <div>API is being called</div>
-    {props.moves.map((val, ind)=>{
-      return <div>{ind}</div>
-        {/* return <div>{props[ind]['move'].name}</div> */}
-      })}
-    </div>
-      
-      
+    {props.data.map((val, ind)=>{
+      return(
+        <div className="basicCard" key={ind}>
+          <img className="card-image" src={val[1].url}/>
+          <div>Username: {val[1].username}</div>
+          <div>Fullname: {val[1].full_name}</div>
+          <div>Followers: {val[1].followers}</div>
+          <div>Vqs: {val[1].vqs}</div>
+          <div>Category: {val[1].category}</div>
+        </div>
+      )
+    })}
+ 
     </>
   )
     // return(

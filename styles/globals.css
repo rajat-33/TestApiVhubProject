@@ -19,15 +19,18 @@ a {
   width:100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   /* align-items: center; */
-  justify-content: center;
+  /* justify-content: center; */
+  align-items: center;
 }
 
 .filter-container{
+  margin-top: 10vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 40vh;
+  height: 10vh;
   width:30vw;
 }
 
@@ -50,6 +53,28 @@ a {
   color: #ffffff;
   background: linear-gradient(90deg, #0052ff 0%, #09c5f9 100%);
   cursor: pointer;
+}
+
+.basicCard{
+  display: flex;
+  margin:1rem 0.5rem;
+  flex-direction: column;
+  border: 2px solid black;
+  width: 23.5vw;
+  padding:1rem;
+  border-radius: 1rem;
+}
+
+.cards-container{
+  display: flex;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-image{
+  height: 4rem;
+  width: 4rem;
 }
 
 @media (prefers-color-scheme: dark) {

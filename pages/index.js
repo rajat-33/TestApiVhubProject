@@ -6,11 +6,23 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { cardClasses } from "@mui/material";
 import Cards from "./components/Cards";
+// import { setDatasets } from "react-chartjs-2/dist/utils";
 // import axios from "../api/axios";
 
 const axios = require('axios');
 
-const categoryArray = ["i", "o", "a"];
+const categoryArray = ["Fashion",
+"Beauty",
+"Parenting",
+"Food&Drink",
+"Fitness",
+"Education",
+"Finance",
+"Marketing",
+"Technology",
+"Travel",
+"Health",
+"Sports",];
   const countryArray = [
     "Afghanistan",
     "Albania",
@@ -218,55 +230,34 @@ const categoryArray = ["i", "o", "a"];
     "Zambia",
     "Zimbabwe",
   ];
-
-  
-  
-
-    // axios
-    //   .get(`https://pokeapi.co/api/v2/pokemon/ditto`, {
-    //     // signal: controller.signal,
-    //   })
-    //   .then((res) => {
-    //     setFirstCardData(res.data);
-    //     console.log(firstCardData);
-    //     // dispatch(setcardloading("showCards"));
-    //   })
-    //   .catch((err) => {
-    //     // if (err.name === "AbortError") return;
-    //     // if (!err?.response) router.push("/profilenotfound");
-    //   });
   
 
 export default function Home() {
-  const [category, setCategory] = useState("");
-  const [country, setCountry] = useState("");
-  const [allMoves, setAllMoves] = useState([]);
-  // const { dsearch, cardLoading } = useSelector((state) => state.dsearchState);
+  const [categoryFilter, setCategoryFilter] = useState("");
+  const [countryFilter, setCountryFilter] = useState("");
+  const [masterData, setMasterData]=useState([]);
   const handleCategoryChange = (e) => {
-    console.log(category, "category");
-    setCategory(e.target.value);
+    setCategoryFilter(e.target.value);
   };
   const handleCountryChange = (e) => {
-    console.log(country, "country");
-    setCountry(e.target.value);
+    setCountryFilter(e.target.value);
   };
 
-  const fetchData = () => {
-
+  const fetchData = async () => {
     axios.get('https://vedasis-server-bsng2qeg2a-uc.a.run.app/vedasis/instagram/profiles/filter/country_interest', {
       headers: {
-        country: country,
-        category: category
+        country: countryFilter,
+        category: categoryFilter
       },
     }).then(resp => {
-
-    console.log(resp.data);
-    // setAllMoves([]);
+      if(resp.data)
+      {
+        setMasterData(Object.entries(resp.data));
+        console.log(masterData);
+      }
     })
     .catch((err) => {
-      console.log(err);
-      //     // if (err.name === "AbortError") return;
-      //     // if (!err?.response) router.push("/profilenotfound");
+      
         });
       };
     
@@ -277,7 +268,7 @@ export default function Home() {
           <div className="select-category-container">
             <label className="">Select Category</label>
             <Select
-              value={category}
+              value={categoryFilter}
               onChange={handleCategoryChange}
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
@@ -314,7 +305,7 @@ export default function Home() {
           <div className="select-country-container">
             <label className="">Select Country</label>
             <Select
-              value={country}
+              value={countryFilter}
               onChange={handleCountryChange}
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
@@ -352,7 +343,9 @@ export default function Home() {
             <button className="apply-btn" onClick={fetchData}>Search</button>
           </div>
         </div>
-        <div className="cards-container"><Cards moves={allMoves}/></div>
+        <div className="cards-container">
+          <Cards data={masterData}/>
+        </div>
       </div>
     </>
   );
